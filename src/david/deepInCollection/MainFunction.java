@@ -13,6 +13,7 @@ public class MainFunction {
 		// CollectionMethods.collectionMethods();
 		// CollectionMethods.iteratorDemo();
 		// CollectionMethods.slistDemo();
-		DemoRun.treeSetDemo();
+		// DemoRun.treeSetDemo();
+		DemoRun.customSortedSetDemo();
 	}
 }
