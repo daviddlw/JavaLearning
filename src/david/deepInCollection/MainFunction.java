@@ -1,5 +1,6 @@
 package david.deepInCollection;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,11 @@ public class MainFunction {
 		// CollectionMethods.iteratorDemo();
 		// CollectionMethods.slistDemo();
 		// DemoRun.treeSetDemo();
-		DemoRun.customSortedSetDemo();
+		// DemoRun.customSortedSetDemo();
+		// DemoRun.queueBehaviorDemo();
+		// DemoRun.customPriorityQueue();
+		// DemoRun.associateArrayDemo();
+		// DemoRun.sumCharactersCount();
+		DemoRun.linkedHashMap();
 	}
 }
