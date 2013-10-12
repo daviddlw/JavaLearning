@@ -16,13 +16,13 @@ public class MapGenerator {
 	for (int i = 0; i < size; i++) {
 	    String key = size == 0 ? String.valueOf(characters[rand
 		    .nextInt(characters.length)])
-		    : String.valueOf(characters[Math.abs(rand.nextInt()) % size])
+		    : String.valueOf(characters[Math.abs(rand.nextInt(size)) % characters.length])
 			    + String.valueOf(characters[rand
 				    .nextInt(characters.length)]);
 
 	    String value = size == 0 ? String.valueOf(numbers[rand
 		    .nextInt(numbers.length)]) : String.valueOf(numbers[Math
-		    .abs(rand.nextInt()) % size])
+		    .abs(rand.nextInt(size)) % numbers.length])
 		    + String.valueOf(numbers[rand.nextInt(numbers.length)]);
 
 	    map.put(key, value);
