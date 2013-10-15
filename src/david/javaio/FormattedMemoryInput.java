@@ -6,12 +6,12 @@ import java.io.IOException;
 
 public class FormattedMemoryInput {
 
-	public static void formattedMemoryInput(String path) throws IOException {
-		DataInputStream in = new DataInputStream(new ByteArrayInputStream(
-				BufferedInputFile.read(path).getBytes()));
+    public static void formattedMemoryInput(String path) throws IOException {
+	DataInputStream in = new DataInputStream(new ByteArrayInputStream(
+		BufferedInputFile.read(path).getBytes()));
 
-		while (in.available() > 0) {
-			System.out.print((char) in.readByte());
-		}
+	while (in.available() > 0) {
+	    System.out.print((char) in.readByte());
 	}
+    }
 }
