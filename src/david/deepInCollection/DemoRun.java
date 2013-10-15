@@ -29,6 +29,21 @@ import org.apache.commons.lang3.text.StrBuilder;
 public class DemoRun {
 	private static int number = 1000;
 
+	public static void removeArrayDemo() {
+		int a[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		int b[] = { 3, 5, 1 };
+		List<Integer> aList = new ArrayList<Integer>();
+		List<Integer> bList = new ArrayList<Integer>();
+		for (int i : a) {
+			aList.add(i);
+		}
+		for (int i : b) {
+			bList.add(i);
+		}
+		aList.removeAll(bList);
+		System.out.println(aList);
+	}
+
 	/*
 	 * 查找满足某个时间段下面的内容
 	 */

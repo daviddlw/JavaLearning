@@ -9,12 +9,13 @@ public class MainFunction {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		 DemoRun.sortedDirList();
-//		 DemoRun.listAllFiles("G:\\MSN作业");
-//		 DemoRun.directoryClassDemo();
-//		 MakeDirectories.runMainFun(new String[] { "-d", "mongodb","redis" });
-//		 DemoRun.testTime();
-//		 DemoRun.searchFileConditions("G:\\软件项目");
-		 DemoRun.searchFilesDemo();
+		// DemoRun.sortedDirList();
+		// DemoRun.listAllFiles("G:\\MSN作业");
+		// DemoRun.directoryClassDemo();
+		// MakeDirectories.runMainFun(new String[] { "-d", "mongodb","redis" });
+		// DemoRun.testTime();
+		// DemoRun.searchFileConditions("G:\\软件项目");
+		// DemoRun.searchFilesDemo();
+		DemoRun.bufferedInputFileDemo();
 	}
 }

@@ -1,7 +1,9 @@
 package david.javaio;
 
 import java.awt.event.ItemEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,16 +24,37 @@ import david.deepInCollection.MapGenerator;
 import david.deepInCollection.SimpleHashMap;
 import david.deepInCollection.SlowMap;
 import david.deepInCollection.SortedDirList;
+import david.util.StringUtil;
 
 public class DemoRun {
 
 	private static int number = 1000;
 
+	public static void bufferedInputFileDemo() {
+		try {
+			String path = ".//testHelloWorld.txt";
+			System.out.println(BufferedInputFile.read(path));
+			StringUtil.printSplitLines();
+			System.out.println(BufferedInputFile.readByReverse(path));
+			StringUtil.printSplitLines();
+			System.out.println(BufferedInputFile.upperArrayList(path));
+			StringUtil.printSplitLines();
+			System.out.println(BufferedInputFile.searchedList(path, "do you"));
+			StringUtil.printSplitLines();
+			System.out.println(MemoryInput.readBySingleChar(path));
+			StringUtil.printSplitLines();
+			FormattedMemoryInput.formattedMemoryInput(path);
+		} catch (IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
 	public static void searchFilesDemo() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2013, 0, 1, 0, 0, 0);
 		String filepath = "D:\\";
-		File file = new File(filepath);		
+		File file = new File(filepath);
 		List<SearchedFile> searchedResult = new ArrayList<SearchedFile>();
 		for (File item : file.listFiles()) {
 			Calendar lastmodifiedDate = Calendar.getInstance();
@@ -45,7 +68,7 @@ public class DemoRun {
 				}
 			}
 		}
-		
+
 		Collections.sort(searchedResult);
 		for (SearchedFile sitem : searchedResult) {
 			System.out.println(sitem.toString());

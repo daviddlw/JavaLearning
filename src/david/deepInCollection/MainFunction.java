@@ -30,6 +30,7 @@ public class MainFunction {
 		// DemoRun.stringHashCode();
 		// DemoRun.customCountedString();
 		// DemoRun.apacheCommons();
-		DemoRun.searchFilesDemo();
+		// DemoRun.searchFilesDemo();
+		DemoRun.removeArrayDemo();
 	}
 }
