@@ -1,7 +1,9 @@
 package david.deepInCollection;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,6 +29,33 @@ import org.apache.commons.lang3.text.StrBuilder;
 public class DemoRun {
 	private static int number = 1000;
 
+	/*
+	 * 查找满足某个时间段下面的内容
+	 */
+	public static void searchFilesDemo() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2013, 0, 1, 0, 0, 0);
+		String filepath = "D:\\";
+		File file = new File(filepath);
+		Calendar lastmodifiedDate = Calendar.getInstance();
+		List<SearchedFile> searchedResult = new ArrayList<SearchedFile>();
+		for (File item : file.listFiles()) {
+			lastmodifiedDate.clear();
+			lastmodifiedDate.setTimeInMillis(item.lastModified());
+			if (lastmodifiedDate.compareTo(calendar) > 0) {
+				if (!item.isHidden()) {
+					SearchedFile sf = new SearchedFile(item.getName(),
+							lastmodifiedDate);
+					searchedResult.add(sf);
+				}
+			}
+		}
+		Collections.sort(searchedResult);
+		for (SearchedFile searchItem : searchedResult) {
+			System.out.println(searchItem.toString());
+		}
+	}
+
 	public static void apacheCommons() {
 		StrBuilder sb = new StrBuilder();
 		sb.appendln("hello");
@@ -38,7 +67,6 @@ public class DemoRun {
 		sb2.append("world");
 		System.out.println(sb2.toString());
 		System.out.println(StringUtils.leftPad("7", 2, "0"));
-		
 	}
 
 	public static void customCountedString() {
