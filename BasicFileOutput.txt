@@ -1,0 +1,6 @@
+1 £ºwelcome to the coding world
+2 £ºdo you like mongodb
+3 £ºdo you like redis
+4 £ºcasarrdra
+5 £ºhbase
+6 £ºbigtable
