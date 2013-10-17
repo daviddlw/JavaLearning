@@ -1,17 +1,17 @@
 package david.javaio;
 
-import java.awt.image.IndexColorModel;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
@@ -44,6 +43,65 @@ public class DemoRun {
 	private final static String READ = "r";
 	private final static String READ_AND_WRITE = "rw";
 	
+	public static void osExecution() {
+//		OSExecute.command("javap -OSExecuteDemo");
+		List<String> ls = OSExecute.commandByList("javap -OSExecuteDemo");
+		for (String item : ls) {
+			System.out.println(item);
+		}
+	}
+
+	public static void redirectDemo() {
+		try {
+			PrintStream console = System.out;
+			BufferedInputStream in = new BufferedInputStream(
+					new FileInputStream("dest.txt"));
+			PrintStream out = new PrintStream(new BufferedOutputStream(
+					new FileOutputStream("redirect.txt")));
+			System.setIn(in);
+//			byte[] bytes = new byte[in.available()];
+//			in.read(bytes);
+//			out.write(bytes);
+			System.setOut(out);
+			System.setErr(out);
+			in.close();
+			out.close();
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					System.in));
+			String s;
+			while ((s = br.readLine()) != null) {
+				System.out.println(s);
+			}
+			out.close();
+			System.setOut(console);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	/*
+	 * echo demo
+	 */
+	public static void stringToUpperCase() {
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					System.in));
+			String s;
+			while ((s = in.readLine()) != null && s.length() > 0) {
+				System.out.println(s.toUpperCase());
+			}
+			in.close();
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
+	}
+
+	public static void printWriterDemo() {
+		PrintWriter out = new PrintWriter(System.err, true); // 请输出流弄到System.err上
+		out.println("Hello World");
+		out.close();
+	}
+
 	/*
 	 * thinking in java练习题
 	 */
@@ -51,7 +109,7 @@ public class DemoRun {
 		calculateCharactersDemo();
 		calculateBytesDemo();
 	}
-	
+
 	/*
 	 * 按照不同字节数统计
 	 */

@@ -21,6 +21,10 @@ public class MainFunction {
 		// DemoRun.bufferedInputFileDemo();
 		// DemoRun.randomFileAccessDemo();
 		// DemoRun.textFileDemo();
-		 DemoRun.calcuateToMap();		
+		// DemoRun.calcuateToMap();
+		// DemoRun.stringToUpperCase();
+		// DemoRun.printWriterDemo();
+		// DemoRun.redirectDemo();
+		DemoRun.osExecution();
 	}
 }
