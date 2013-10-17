@@ -25,6 +25,6 @@ public class MainFunction {
 		// DemoRun.stringToUpperCase();
 		// DemoRun.printWriterDemo();
 		// DemoRun.redirectDemo();
-		DemoRun.osExecution();
+		 DemoRun.osExecution();
 	}
 }
