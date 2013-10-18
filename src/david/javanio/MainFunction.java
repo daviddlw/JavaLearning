@@ -18,6 +18,7 @@ public class MainFunction {
 		// System.out.println(Integer.MAX_VALUE + 1 < Integer.MAX_VALUE);
 		// ((Null)null).getClass().newInstance().haha();
 		// DemoRun.byteBufferSlice();
-		DemoRun.lockingMappedFileDemo();
+		// DemoRun.lockingMappedFileDemo();
+		FileCompress.gzipCompress();
 	}
 }
