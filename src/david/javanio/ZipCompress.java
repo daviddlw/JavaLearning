@@ -68,10 +68,11 @@ public class ZipCompress {
 	readByZipEntry(zis, bis);
 	// 通过ZipFile读取文件
 //	readByZipFile(zis, bis);
-
+	
 	System.out.println("Checksum => " + cos.getChecksum().getValue());
     }
 
+    @SuppressWarnings("unused")
     private static void readByZipFile(ZipInputStream zis, BufferedReader bis)
 	    throws IOException {
 
@@ -87,6 +88,8 @@ public class ZipCompress {
 		System.out.println(s);
 	    }
 	}
+	zis.close();
+	bis.close();
     }
 
     private static void readByZipEntry(ZipInputStream zis, BufferedReader bis)
@@ -102,6 +105,8 @@ public class ZipCompress {
 		System.out.println(s);
 	    }
 	}
+	zis.close();
+	bis.close();
     }
 
     /*

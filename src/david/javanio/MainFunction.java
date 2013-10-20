@@ -20,6 +20,7 @@ public class MainFunction {
 	// DemoRun.byteBufferSlice();
 	// DemoRun.lockingMappedFileDemo();
 	// FileCompress.gzipCompress();
-	DemoRun.zipCompressDemo();
+	// DemoRun.zipCompressDemo();F
+	DemoRun.serializeObjectDemo();
     }
 }
