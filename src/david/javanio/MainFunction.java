@@ -21,6 +21,7 @@ public class MainFunction {
 	// DemoRun.lockingMappedFileDemo();
 	// FileCompress.gzipCompress();
 	// DemoRun.zipCompressDemo();F
-	DemoRun.serializeObjectDemo();
+	// DemoRun.serialObjectDemo();
+	DemoRun.serializeSimpleObjectToXml();
     }
 }

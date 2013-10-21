@@ -14,6 +14,10 @@ public class SimpleType implements Serializable{
 	this.type = type;
     }
     
+    public String type() {
+	return type;
+    }
+    
     @Override
     public String toString() {
         // TODO Auto-generated method stub

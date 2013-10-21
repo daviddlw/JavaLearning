@@ -1,25 +1,115 @@
 package david.javanio;
 
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel.MapMode;
+import java.util.Arrays;
+import java.util.List;
+
+import nu.xom.Document;
+import nu.xom.Element;
+import nu.xom.Serializer;
 import david.javanio.MappedIO.Tester;
 
 public class DemoRun {
     private static FileChannelClass fcc = new FileChannelClass();
     private static ViewBuffers vb = new ViewBuffers();
+    private static String persistence_path = "simpleObj.data";
+    private static String xml_path = "simpleobj.xml";
+    
+    /*
+     * 序列化简单对象
+     */
+    public static void serializeSimpleObjectToXml() {
+	List<SimpleObject> ls = Arrays.asList(new SimpleObject(1, "daviddai"),
+		new SimpleObject(2, "redis"), new SimpleObject(3, "mongodb"));
+	Element root = new Element("SimpleObjectList");
+
+	for (SimpleObject item : ls) {
+	    root.appendChild(toXML(item));
+	}
+
+	Document doc = new Document(root);
+	try {
+	    format(System.out, doc);
+	    format(new BufferedOutputStream(new FileOutputStream(xml_path)),
+		    doc);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    e.printStackTrace();
+	}
+
+    }
+
+    private static Element toXML(SimpleObject obj) {
+
+	Element so = new Element("SimpleObject");
+	Element id = new Element("Id");
+	Element name = new Element("Name");
+	id.appendChild(String.valueOf(obj.id()));
+	name.appendChild(obj.name());
+	Element objType = new Element("SimpleType");
+	Element type = new Element("Type");
+	type.appendChild(obj.simpleType().type());
+	objType.appendChild(type);
+
+	so.appendChild(id);
+	so.appendChild(name);
+	so.appendChild(objType);
+
+	return so;
+    }
+
+    /*
+     * 格式化xml数据
+     */
+    private static void format(OutputStream out, Document doc) throws Exception {
+	Serializer serializer = new Serializer(out, "GBK");
+	serializer.setIndent(4);
+	serializer.setMaxLength(60);
+	serializer.write(doc);
+	serializer.flush();
+    }
+
+    public static void serialObjectDemo() {
+	serializeObject();
+	serializeObjectByExternal();
+    }
+
+    /*
+     * 通过实现Externalizable接口实现序列化，需要自己重写readExternal与writeExternal方法
+     */
+    public static void serializeObjectByExternal() {
+	try {
+	    ObjectOutputStream out = new ObjectOutputStream(
+		    new FileOutputStream(persistence_path));
+	    out.writeObject(new SimpleObjectExternal(1, "daviddai"));
+	    out.close();
+
+	    ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+		    persistence_path));
+	    SimpleObjectExternal soe = (SimpleObjectExternal) in.readObject();
+	    in.close();
+	    System.out.println(soe.toString());
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    e.printStackTrace();
+	}
+    }
 
     /*
      * 测试序列化简单对象
      */
-    public static void serializeObjectDemo() {
-	String persistence_path = "simpleObj.data";
+    public static void serializeObject() {
 
 	try {
 	    ObjectOutputStream out = new ObjectOutputStream(
@@ -149,5 +239,10 @@ public class DemoRun {
 	buffer.position(5);
 	System.out.println(buffer.slice().capacity()); // slice为当前limit/capacity
 						       // - position
+    }
+
+    public static void covertToInt() {
+	Integer i = Integer.valueOf("8888");
+	System.out.println(i);
     }
 }
