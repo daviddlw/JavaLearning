@@ -12,20 +12,103 @@ import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel.MapMode;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import javax.swing.event.TreeExpansionEvent;
+
+import nu.xom.Attribute;
+import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
+import nu.xom.Elements;
 import nu.xom.Serializer;
+import david.deepInCollection.AssociateArray;
+import david.deepInCollection.CollectionData;
+import david.deepInCollection.RandomGen;
 import david.javanio.MappedIO.Tester;
+import david.util.StringUtil;
 
 public class DemoRun {
     private static FileChannelClass fcc = new FileChannelClass();
     private static ViewBuffers vb = new ViewBuffers();
     private static String persistence_path = "simpleObj.data";
     private static String xml_path = "simpleobj.xml";
+    private static String xml_cal_path = "simpleCharCals.xml";
     
+    /*
+     * 计算字母各个字母数量,使用treeMap自带排序效果
+     */
+    public static void countChars() {
+	List<String> ls = new ArrayList<String>(new CollectionData<String>(
+		new RandomGen(1).getString(), 52));
+	Collections.sort(ls);
+	Map<String, Integer> hashMap = new TreeMap<String, Integer>();
+	for (String item : ls) {
+	    if (!hashMap.containsKey(item)) {
+		hashMap.put(item, 1);
+	    } else {
+		hashMap.put(item, hashMap.get(item) + 1);
+	    }
+	}
+	System.out.println(ls.toString());
+	StringUtil.printSplitLines();
+	System.out.print(hashMap.toString());	
+	System.out.println();
+	StringUtil.printSplitLines();
+	Element root = new Element("Chars");
+//	root.setNamespaceURI("http://weibo.com/daviddlw/");
+	root.addNamespaceDeclaration("david.declaration", "http://weibo.com/daviddlw/"); //添加命名控件声明
+	for (String key : hashMap.keySet()) {
+	    root.appendChild(toCharXml(key, hashMap.get(key).intValue()));
+	}
+	Document doc = new Document(root);
+	try {
+	    format(System.out, doc);
+	    format(new BufferedOutputStream(new FileOutputStream(xml_cal_path)),
+		    doc);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    e.printStackTrace();
+	}
+    }
+    
+    private static Element toCharXml(String name, Integer value) {
+	Element cElement = new Element(name);
+	cElement.addAttribute(new Attribute("Count", value.toString()));
+	return cElement;
+    }
+    
+    /*
+     * 读取xml返回实体类集合
+     */
+    public static void readFromXmlFile() {
+	List<SimpleObject> ls = new ArrayList<SimpleObject>();
+	try {
+	    Document doc = new Builder().build(xml_path);
+	    Element root = doc.getRootElement();
+	    Elements elements = root.getChildElements();
+	    for (int i = 0; i < elements.size(); i++) {
+		int id = Integer.valueOf(elements.get(i)
+			.getFirstChildElement("Id").getValue());
+		String name = elements.get(i).getFirstChildElement("Name")
+			.getValue();
+		ls.add(new SimpleObject(id, name));
+	    }
+	    for (SimpleObject item : ls) {
+		System.out.println(item);
+	    }
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    e.printStackTrace();
+	}
+    }
+
     /*
      * 序列化简单对象
      */
@@ -47,8 +130,9 @@ public class DemoRun {
 	    // TODO: handle exception
 	    e.printStackTrace();
 	}
-
     }
+    
+    
 
     private static Element toXML(SimpleObject obj) {
 

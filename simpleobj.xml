@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<SimpleObjectList>
+    <SimpleObject>
+        <Id>1</Id>
+        <Name>daviddai</Name>
+        <SimpleType>
+            <Type>1_daviddai_type</Type>
+        </SimpleType>
+    </SimpleObject>
+    <SimpleObject>
+        <Id>2</Id>
+        <Name>redis</Name>
+        <SimpleType>
+            <Type>2_redis_type</Type>
+        </SimpleType>
+    </SimpleObject>
+    <SimpleObject>
+        <Id>3</Id>
+        <Name>mongodb</Name>
+        <SimpleType>
+            <Type>3_mongodb_type</Type>
+        </SimpleType>
+    </SimpleObject>
+</SimpleObjectList>

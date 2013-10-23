@@ -41,6 +41,6 @@ public class SimpleObject implements Serializable {
     public String toString() {
 	// TODO Auto-generated method stub
 	return "id: " + id + " => name: " + name + " type: " + type
-		+ "\nbirth: " + birth.getTime().toString();
+		+ " birth: " + birth.getTime().toString();
     }
 }

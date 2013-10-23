@@ -22,6 +22,8 @@ public class MainFunction {
 	// FileCompress.gzipCompress();
 	// DemoRun.zipCompressDemo();F
 	// DemoRun.serialObjectDemo();
-	DemoRun.serializeSimpleObjectToXml();
+	// DemoRun.serializeSimpleObjectToXml();
+	// DemoRun.readFromXmlFile();
+	DemoRun.countChars();
     }
 }
