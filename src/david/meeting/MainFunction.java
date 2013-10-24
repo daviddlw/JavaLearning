@@ -6,7 +6,7 @@ public class MainFunction {
 	// TODO Auto-generated method stub
 	// new HelloB();
 	// new Derived();
-	DemoRun.reflectDemo();
+	 DemoRun.reflectDemo();
     }
 
 }

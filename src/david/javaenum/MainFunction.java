@@ -27,7 +27,8 @@ public class MainFunction {
 	// System.out.println(RandomEnum.random(Metrics.class));
 	// enumSetDemo();
 	// enumMapDemo();
-	projectOnlineEnum();
+	// projectOnlineEnum();
+	RockSiccorsPaper.gameStart(10);
     }
 
     private static void projectOnlineEnum() {
