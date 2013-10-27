@@ -28,7 +28,9 @@ public class MainFunction {
 	// enumSetDemo();
 	// enumMapDemo();
 	// projectOnlineEnum();
-	RockSiccorsPaper.gameStart(10);
+	// RockSiccorsPaper.gameStart(10);
+	// RockSiccorsPaperEnumMap.testGame(10);
+	RockSiccorsPaperArray.testGame(10);
     }
 
     private static void projectOnlineEnum() {

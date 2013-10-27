@@ -6,8 +6,13 @@ import java.util.Calendar;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
+import org.junit.Test;
 
 public class DemoRun {
+    
+    public static boolean compareTwoNumbers(int a, int b) {
+	return a > b;
+    }
 
     public static void reflectDemo() {
 	Calendar birth = Calendar.getInstance();

@@ -10,7 +10,7 @@ public class Person {
     private String address;
     private String cellphone;
     private Calendar birth;
-
+    
     public Person() {
 	// TODO Auto-generated constructor stub
     }
