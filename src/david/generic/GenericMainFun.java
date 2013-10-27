@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import david.thinkinginJava.Student;
+import david.model.Student;
 import david.util.CollectionUtils;
 
 public class GenericMainFun {

@@ -5,8 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import david.thinkinginJava.Student;
+import david.model.Student;
 
 public class UseCaseDemoTest {
 

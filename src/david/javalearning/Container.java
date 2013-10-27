@@ -2,7 +2,7 @@ package david.javalearning;
 
 import java.util.List;
 
-import david.thinkinginJava.Student;
+import david.model.Student;
 
 public class Container {
 

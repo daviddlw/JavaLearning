@@ -19,6 +19,7 @@ import david.javalearning.TryCatchDemo;
 import david.javalearning.Woman;
 import david.util.HiddenImp;
 import david.util.IDemoInteface;
+import david.model.Student;
 
 public class DemoRun {
 
