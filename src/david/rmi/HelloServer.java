@@ -28,7 +28,6 @@ public class HelloServer {
 			// TODO Auto-generated catch block
 			System.out.println("发生URL非法异常");
 			ex.printStackTrace();
-		}
-		
+		}		
 	}
 }
