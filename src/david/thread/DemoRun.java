@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -17,6 +18,111 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.time.StopWatch;
 
 public class DemoRun {
+
+	public static void serialNumberDemo(boolean isInner) {
+		ExecutorService service = Executors.newCachedThreadPool();
+		if (isInner) {
+			final CircularSet cs = new CircularSet(1000);
+			for (int i = 0; i < 10; i++) {
+				service.execute(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						while (true) {
+							int serial = new SerialNumberGenerator().next();
+							if (cs.contains(serial)) {
+								System.out.println("有重复值：" + serial);
+								System.exit(0);
+							}
+							cs.add(serial);
+						}
+					}
+				});
+			}
+		} else {
+			service.execute(new SerialNumberChecker());
+		}
+		System.out.println("没有重复值");
+		System.exit(0);
+	}
+
+	public static void attemptingLock() {
+		final AttemptingLock attemptingLock = new AttemptingLock();
+		attemptingLock.untimed();
+		attemptingLock.timed();
+
+		new Thread() {
+			{
+				setDaemon(true);
+			}
+			public void run() {
+				attemptingLock.lock.lock();
+				System.out.println("acquired!");
+			};
+		}.start();
+
+		// Thread back = new Thread(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// // TODO Auto-generated method stub
+		// attemptingLock.lock.lock();
+		// System.out.println("acquired!");
+		// }
+		// });
+		// back.setDaemon(true);
+		// back.start();
+
+		attemptingLock.untimed();
+		attemptingLock.timed();
+	}
+
+	public static void personAccountDemo() {
+		ExecutorService service = Executors.newCachedThreadPool();
+		PersonAccount personAccount = new PersonAccount();
+		// personAccount.init();
+		for (int i = 0; i < 3; i++) {
+			service.execute(personAccount);
+		}
+	}
+
+	/*
+	 * 线程的异常捕获机制
+	 */
+	public static void exceptionThread(boolean enableUncaughtExceptin) {
+		if (enableUncaughtExceptin) {
+			Thread.setDefaultUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
+			ExecutorService service = Executors
+					.newCachedThreadPool(new MyUncaughtExceptionFactory());
+			service.execute(new ExceptionThread());
+		} else {
+			// 从线程中run方法中抛出的异常是没有办法被try-catch捕获的
+			try {
+				ExecutorService service = Executors.newCachedThreadPool();
+				service.execute(new ExceptionThread());
+			} catch (RuntimeException e) {
+				// TODO: handle exception
+				System.out.println("exception has been catched!");
+			}
+		}
+	}
+
+	public static void readFromSystemIn() {
+		@SuppressWarnings("resource")
+		String s = new Scanner(System.in).nextLine();
+		System.out.println(s);
+	}
+
+	public static void sleeperAndJoiner() {
+		Sleeper sleeperOne = new Sleeper("sleeperOne", 1500);
+		Sleeper sleeperTwo = new Sleeper("sleeperTwo", 1500);
+
+		Joiner joinerOne = new Joiner("joinerOne", sleeperOne);
+		Joiner joinerTwo = new Joiner("joinerTwo", sleeperTwo);
+
+		sleeperOne.interrupt();
+	}
 
 	public static void daemonDemo() {
 		Thread d = new Thread(new Daemon());

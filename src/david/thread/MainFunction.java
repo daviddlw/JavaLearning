@@ -1,5 +1,8 @@
 package david.thread;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class MainFunction {
 
 	public static void main(String[] args) {
@@ -19,6 +22,13 @@ public class MainFunction {
 		// DemoRun.sleepTaskNoRunnable();
 		// DemoRun.simplePriority();
 		// DemoRun.simpleDaemonFactory();
-		DemoRun.daemonDemo();
+		// DemoRun.daemonDemo();
+		// DemoRun.sleeperAndJoiner();
+		// DemoRun.exceptionThread(true);
+		// DemoRun.personAccountDemo();
+		// EvenChecker.test(new EvenGenerator());
+		// EvenChecker.test(new MutexEvenGenerator());
+		// DemoRun.attemptingLock();
+		DemoRun.serialNumberDemo(false);
 	}
 }
