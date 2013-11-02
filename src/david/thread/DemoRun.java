@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
@@ -18,6 +20,31 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.time.StopWatch;
 
 public class DemoRun {
+
+	public static void timerCalculate() {
+		Timer timer = new Timer("测试后台", false);
+		timer.schedule(new TimerTask() {
+			int count = 10;
+			int total = 0;
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				for (int i = 0; i < 10; i++) {
+					total += i;
+				}
+				System.out.println("Total=>" + total);
+			}
+		}, 2000);
+		try {
+			System.out.println("计算中......");			
+			TimeUnit.MILLISECONDS.sleep(2100);
+//			Thread.sleep(2100);			
+			System.out.println("计算完成！");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static void serialNumberDemo(boolean isInner) {
 		ExecutorService service = Executors.newCachedThreadPool();

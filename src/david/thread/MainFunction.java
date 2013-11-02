@@ -29,6 +29,7 @@ public class MainFunction {
 		// EvenChecker.test(new EvenGenerator());
 		// EvenChecker.test(new MutexEvenGenerator());
 		// DemoRun.attemptingLock();
-		DemoRun.serialNumberDemo(false);
+		// DemoRun.serialNumberDemo(false);
+		DemoRun.timerCalculate();
 	}
 }
