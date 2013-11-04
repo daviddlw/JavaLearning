@@ -21,11 +21,58 @@ import org.apache.commons.lang3.time.StopWatch;
 
 public class DemoRun {
 
+	public static void ornamentalGarden() {
+		ExecutorService service = Executors.newCachedThreadPool();
+		for (int i = 0; i < 5; i++) {
+			service.execute(new Entrance(i));
+		}
+		try {
+			TimeUnit.SECONDS.sleep(3);
+			Entrance.cancel();
+			service.shutdown();
+			if (!service.awaitTermination(250, TimeUnit.MILLISECONDS))
+				System.out.println("Some tasks were not terminated!");
+			System.out.println("Total: " + Entrance.getTotal()); // 两种方式分别计算(count对象加synchronized块)
+			System.out.println("Sum of entrances: " + Entrance.sumEntrances());// 两种方式分别计算(利用单个线程的同步getValue方法和内部维护的ls-Entrance集合sum起来)
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void threadLocalVarHolderDemo() {
+		ExecutorService service = Executors.newCachedThreadPool();
+		for (int i = 0; i < 5; i++) {
+			service.execute(new Accessor(i));
+		}
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		service.shutdownNow();
+	}
+
+	public static void dualSynchDemo() {
+		final DualSynch ds = new DualSynch();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				ds.f();
+			}
+		}).start();
+		ds.g();
+	}
+
 	public static void timerCalculate() {
 		Timer timer = new Timer("测试后台", false);
 		timer.schedule(new TimerTask() {
 			int count = 10;
 			int total = 0;
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
@@ -36,9 +83,9 @@ public class DemoRun {
 			}
 		}, 2000);
 		try {
-			System.out.println("计算中......");			
+			System.out.println("计算中......");
 			TimeUnit.MILLISECONDS.sleep(2100);
-//			Thread.sleep(2100);			
+			// Thread.sleep(2100);
 			System.out.println("计算完成！");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -83,6 +130,7 @@ public class DemoRun {
 			{
 				setDaemon(true);
 			}
+
 			public void run() {
 				attemptingLock.lock.lock();
 				System.out.println("acquired!");
@@ -303,26 +351,26 @@ public class DemoRun {
 
 	public static void basicThreadRun(RunType type) {
 		switch (type) {
-			case Run : {
-				BasicThread bt = new BasicThread();
-				bt.run();
+		case Run: {
+			BasicThread bt = new BasicThread();
+			bt.run();
+		}
+			break;
+		case Start: {
+			new Thread(new BasicThread()).start();
+		}
+			break;
+		case MutipleThread: {
+			for (int i = 0; i < 5; i++) {
+				Thread t = new Thread(new BasicThread(String.valueOf("thread"
+						+ (i + 1))));
+				t.start();
 			}
-				break;
-			case Start : {
-				new Thread(new BasicThread()).start();
-			}
-				break;
-			case MutipleThread : {
-				for (int i = 0; i < 5; i++) {
-					Thread t = new Thread(new BasicThread(
-							String.valueOf("thread" + (i + 1))));
-					t.start();
-				}
-			}
-				break;
-			default :
-				new Thread(new BasicThread()).start();
-				break;
+		}
+			break;
+		default:
+			new Thread(new BasicThread()).start();
+			break;
 		}
 
 	}
