@@ -7,5 +7,6 @@ public class MainFunction {
 	// new HelloB();
 	// new Derived();
 	// DemoRun.reflectDemo();
+	CalendarFormat.testCalendarFormat();
     }
 }

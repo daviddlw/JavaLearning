@@ -18,6 +18,6 @@ public class MainFunction {
 	// Algorithm.combineDiffNumbers();
 	// Algorithm.guessNumber();
 	// Algorithm.judgeDaysDemo();
-	Algorithm.sortXYZ();
+//	Algorithm.sortXYZ();
     }
 }

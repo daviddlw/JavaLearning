@@ -1,6 +1,7 @@
 package david.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -51,5 +52,14 @@ public class CollectionUtils {
     
     public static <T> Set<T> complement(Set<T> s1, Set<T> s2) {	
 	return different(unionAll(s1, s2), intersect(s1, s2));
+    }
+    
+    /*
+     * 转换Object[]数组为List<T>列表
+     */
+    public static <T> List<T> transformList(Object[] objArr) {
+	@SuppressWarnings("unchecked")
+	List<T> ls = (List<T>) Arrays.asList(objArr);
+	return new ArrayList<T>(ls);
     }
 }

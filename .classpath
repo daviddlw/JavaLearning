@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="Lib/xom-1.2.10.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="Lib/mysql-connector-java-5.1.26-bin.jar"/>
+	<classpathentry kind="lib" path="Lib/mybatis-3.2.3.jar" sourcepath="J:/开发/Java/压缩包/mybatis-3.2.3.zip"/>
+	<classpathentry kind="lib" path="Lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
