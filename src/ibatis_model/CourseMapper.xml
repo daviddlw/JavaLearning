@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="david.myibatis.ICourseOperation"><!-- 包名需要和接口的命名空间相对应否则会报错 -->
+	<select id="queryCourseById" parameterType="int" resultType="Course">
+		select * from Course where id = #{id}
+	</select>
+	<select id="queryListByStudentId" parameterType="int"
+		resultMap="courseResultMap">
+		select * from
+		Course where StudentId = #{id}
+	</select>
+	<resultMap id="courseResultMap" type="Course">
+		<id property="id" column="Id" />
+		<result property="studentId" column="studentId" />
+		<result property="courseName" column="CourseName" />
+	</resultMap>
+</mapper>

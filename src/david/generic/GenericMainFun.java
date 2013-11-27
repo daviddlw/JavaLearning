@@ -224,7 +224,7 @@ public class GenericMainFun {
 	public static void makeList() {
 		GenericVarArgs.makeList(1, 2, 3);
 		GenericVarArgs.makeList("david");
-		GenericVarArgs.makeList(1, "helloworld", new Student(1, "david.dai"));
+		GenericVarArgs.makeList(1, "helloworld", new Student("david.dai"));
 	}
 
 	public static void collectionUtils() {
@@ -237,9 +237,9 @@ public class GenericMainFun {
 		System.out.println(linkedList.toString());
 
 		Map<Integer, Student> studentMap = CollectionUtils.hashMap();
-		studentMap.put(1, new Student(1, "david.dai"));
-		studentMap.put(2, new Student(2, "lavezhang"));
-		studentMap.put(3, new Student(3, "karlzhao"));
+		studentMap.put(1, new Student("david.dai"));
+		studentMap.put(2, new Student("lavezhang"));
+		studentMap.put(3, new Student("karlzhao"));
 		System.out.println(studentMap.toString());
 
 		Map<Integer, String> map = CollectionUtils.hashMap();
@@ -252,10 +252,10 @@ public class GenericMainFun {
 		GenericMethod.showGenericMethodInfo(2.0);
 		GenericMethod.showGenericMethodInfo(1);
 		GenericMethod.showGenericMethodInfo("hello world");
-		GenericMethod.showGenericMethodInfo(new Student(1, "david.dai"));
+		GenericMethod.showGenericMethodInfo(new Student("david.dai"));
 		System.out.println("---------·Ö¸îÏß----------");
 		GenericMethod.showGenericMethodInfo(1, 8.8,
-				new Student(2, "moneymaker"));
+				new Student("moneymaker"));
 		GenericMethod.showGenericMethodInfo(1, 8.9, "I want more money.");
 	}
 
@@ -289,8 +289,8 @@ public class GenericMainFun {
 
 		Integer[] intArr = new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-		Student[] stuArr = new Student[] { new Student(1, "stuOne"),
-				new Student(2, "stuTwo"), new Student(3, "stuThree") };
+		Student[] stuArr = new Student[] { new Student("stuOne"),
+				new Student("stuTwo"), new Student("stuThree") };
 
 		RandomList<String> rsStrLs = new RandomList<String>();
 		RandomList<Integer> rsIntLs = new RandomList<Integer>();

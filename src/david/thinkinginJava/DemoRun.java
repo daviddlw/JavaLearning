@@ -560,8 +560,8 @@ public class DemoRun {
     public static void objectToStringDemo() {
 
 	List<Student> ls = Arrays.asList(new Student[] {
-		new Student(1, "daviddai"), new Student(2, "lavezhang"),
-		new Student(3, "karlzhao") });
+		new Student("daviddai"), new Student( "lavezhang"),
+		new Student("karlzhao") });
 
 	for (Student item : ls) {
 	    System.out.println(item.toString());
@@ -572,8 +572,8 @@ public class DemoRun {
 	OptionTrailingArguments ota = new OptionTrailingArguments();
 	ota.showArrayItems(1, new String[] { "david", "hello", "world" });
 	ota.showArrayItems(2, new Integer[] { 1, 2 });
-	ota.showArrayItems(3, new Student[] { new Student(1, "stu1"),
-		new Student(2, "stu2") });
+	ota.showArrayItems(3, new Student[] { new Student("stu1"),
+		new Student("stu2") });
     }
 
     public static void displayRMB() {

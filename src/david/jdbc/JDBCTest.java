@@ -126,7 +126,7 @@ public class JDBCTest {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				students.add(new Student(id, name));
+				students.add(new Student(name));
 			}
 			conn.close();
 		} catch (Exception ex) {

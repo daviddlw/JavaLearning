@@ -2,31 +2,31 @@ package david.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Student {
 
 	private int id;
 	private String name;
-	private Calendar birth;
+	private Date birth;
 
 	public Student() {
 		// TODO Auto-generated constructor stub
 		this.id = 0;
 		this.name = "";
-		this.birth = Calendar.getInstance();
+		this.birth = new Date();
 	}
 
-	public Student(int id, String name) {
+	public Student(String name) {
 		// TODO Auto-generated constructor stub
-		this.id = id;
 		this.name = name;
-		this.birth = Calendar.getInstance();
+		this.birth = new Date();
 
 	}
 
 	public Student(int id, String name, Calendar birth) {
-		this(id, name);
-		this.birth = birth;
+		this(name);
+		this.birth = birth.getTime();
 	}
 
 	public void setId(int id) {
@@ -45,11 +45,11 @@ public class Student {
 		return name;
 	}
 
-	public Calendar getCalendar() {
+	public Date getBirth() {
 		return birth;
 	}
 
-	public void setCalendar(Calendar birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
 

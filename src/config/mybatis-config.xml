@@ -3,13 +3,20 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="david.model.Student" alias="Student" />
+		<typeAlias type="david.model.Course" alias="Course" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://localhost:3306/test" />
+				<!-- 
+				添加的作用是：指定字符的编码、解码格式。
+				1. 存数据时：数据库在存放项目数据的时候会先用UTF-8格式将数据解码成字节码，然后再将解码后的字节码重新使用GBK编码存放到数据库中。
+				2. 取数据时：在从数据库中取数据的时候，数据库会先将数据库中的数据按GBK格式解码成字节码，
+				      然后再将解码后的字节码重新按UTF-8格式编码数据，最后再将数据返回给客户端。				
+				 -->
+				<property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8" />
 				<property name="username" value="root" />
 				<property name="password" value="david0110" />
 			</dataSource>
@@ -17,5 +24,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="ibatis_model/StudentMapper.xml" />
+		<mapper resource="ibatis_model/CourseMapper.xml" />
 	</mappers>
 </configuration>

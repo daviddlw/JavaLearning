@@ -59,8 +59,8 @@ public class UseCaseDemoTest {
 
     @Test
     public void testObject() {
-	Student a = new Student(1, "daviddai");
-	Student b = new Student(1, "daviddai");
+	Student a = new Student("daviddai");
+	Student b = new Student("daviddai");
 	Student c = a;
 	System.out.println(a.hashCode() + "|" + b.hashCode() + "|"
 		+ c.hashCode());
@@ -72,8 +72,8 @@ public class UseCaseDemoTest {
     public void testArray() {
 	// assertArrayEquals(new int[] { 1 }, new int[] { 1 });
 	// assertArrayEquals(new String[] { "1" }, new String[] { "1" });
-	Student a = new Student(1, "daviddai");
-	Student b = new Student(1, "daviddai");
+	Student a = new Student("daviddai");
+	Student b = new Student("daviddai");
 	Student c = a;
 	assertArrayEquals(new Student[] { a }, new Student[] { c });
     }
