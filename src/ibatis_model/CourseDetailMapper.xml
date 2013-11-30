@@ -3,14 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="david.myibatis.ICourseDetailOperation">
-	<select id="getList" resultMap="resultMapCourseDetails">
+	<!-- 可以重用sql -->
+	<sql id="getListSql">
 		select
 		course.id, course.coursename, teacher.name teacher_name,student.name
 		student_name
 		from course inner join student on course.StudentId =
 		student.Id
 		INNER JOIN teacher on course.id = teacher.CourseId
-		ORDER BY course.Id
+	</sql>
+	<select id="getTotalCount" resultType="int">
+		select count(1) count from (
+		<include refid="getListSql" />
+		) t
+	</select>
+	<select id="getList" resultMap="resultMapCourseDetails" parameterType="BasicQueryArgs">
+		select * from (
+		<include refid="getListSql" />
+		ORDER BY course.Id) result limit #{pageIndex}, #{pageSize}
 	</select>
 	<resultMap id="resultMapCourseDetails" type="CourseDetail">
 		<id property="id" column="id" />

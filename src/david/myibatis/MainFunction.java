@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import david.model.BasicQueryArgs;
 import david.model.CourseDetail;
 import david.model.Student;
 import david.model.Course;
@@ -20,8 +21,14 @@ public class MainFunction {
     private static final String QUERY_STUDENT_BY_ID_STR = "david.mybatis.StudentMapper.queryStudentById";
 
     public static void main(String[] args) {
-	// TODO Auto-generated method stub
+	/*
+	 * 搭建HelloMyibatis
+	 */
 	// wayOfSqlSessionQuery();
+
+	/*
+	 * 接口方式完成相应增删改查
+	 */
 	// wayOfInterfaceQuery();
 	// wayOfInterfaceQueryStudentLs();
 	// wayOfInterfaceAddStudent();
@@ -31,19 +38,34 @@ public class MainFunction {
 	// wayOfInterfaceQueryCourse();
 	// wayOfInterfaceQueryCourseLs();
 	// wayOfInterfaceAddCourse();
-	queryComplexObj();
+
+	/*
+	 * 联表查询加分页效果（mysql,其他数据库修改相应的SQL语句）
+	 */
+	// queryComplexObj();
     }
-    
+
     /*
      * 夺标联合查询复杂对象
      */
     public static void queryComplexObj() {
 	SqlSession session = getSqlSessionByStream();
-	ICourseDetailOperation idOp = session.getMapper(ICourseDetailOperation.class);
-	List<CourseDetail> ls = idOp.getList();
-	for (CourseDetail item : ls) {
+	ICourseDetailOperation idOp = session
+		.getMapper(ICourseDetailOperation.class);
+	int count = idOp.getTotalCount();
+	BasicQueryArgs queryArgs = new BasicQueryArgs(0, 5);
+	System.out.println("第一页内容：");
+	List<CourseDetail> firstPageLs = idOp.getList(queryArgs);
+	for (CourseDetail item : firstPageLs) {
 	    System.out.println(item);
-	}	
+	}
+	System.out.println("第二页内容：");
+	queryArgs.updatePageIndexAndPageSize(5, 5);
+	List<CourseDetail> secondPageLs = idOp.getList(queryArgs);
+	for (CourseDetail item : secondPageLs) {
+	    System.out.println(item);
+	}
+	System.out.println("本次查询总共有" + count + "条数据。");
     }
 
     public static void wayOfInterfaceAddCourse() {

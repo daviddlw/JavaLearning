@@ -5,7 +5,8 @@
 		<typeAlias type="david.model.Student" alias="Student" />
 		<typeAlias type="david.model.Course" alias="Course" />
 		<typeAlias type="david.model.Teacher" alias="Teacher" />
-		<typeAlias type="david.model.CourseDetail" alias="CourseDetail" />		
+		<typeAlias type="david.model.CourseDetail" alias="CourseDetail" />
+		<typeAlias type="david.model.BasicQueryArgs" alias="BasicQueryArgs" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
