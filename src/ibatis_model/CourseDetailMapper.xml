@@ -3,15 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="david.myibatis.ICourseDetailOperation">
-	<select id="getList" parameterType="int" resultMap="resultMapCourseDetails">
+	<select id="getList" resultMap="resultMapCourseDetails">
 		select
 		course.id, course.coursename, teacher.name teacher_name,student.name
 		student_name
 		from course inner join student on course.StudentId =
 		student.Id
 		INNER JOIN teacher on course.id = teacher.CourseId
-		where
-		course.studentId = #{studentId}
 		ORDER BY course.Id
 	</select>
 	<resultMap id="resultMapCourseDetails" type="CourseDetail">

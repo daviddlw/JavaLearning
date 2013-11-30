@@ -5,5 +5,5 @@ import david.model.CourseDetail;
 
 public interface ICourseDetailOperation {
     
-    public List<CourseDetail> getList(int studentId);
+    public List<CourseDetail> getList();
 }

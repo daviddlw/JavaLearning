@@ -40,7 +40,7 @@ public class MainFunction {
     public static void queryComplexObj() {
 	SqlSession session = getSqlSessionByStream();
 	ICourseDetailOperation idOp = session.getMapper(ICourseDetailOperation.class);
-	List<CourseDetail> ls = idOp.getList(3);
+	List<CourseDetail> ls = idOp.getList();
 	for (CourseDetail item : ls) {
 	    System.out.println(item);
 	}	
