@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="david.myibatis.ICourseDetailOperation">
+	<select id="getList" parameterType="int" resultMap="resultMapCourseDetails">
+		select
+		course.id, course.coursename, teacher.name teacher_name,student.name
+		student_name
+		from course inner join student on course.StudentId =
+		student.Id
+		INNER JOIN teacher on course.id = teacher.CourseId
+		where
+		course.studentId = #{studentId}
+		ORDER BY course.Id
+	</select>
+	<resultMap id="resultMapCourseDetails" type="CourseDetail">
+		<id property="id" column="id" />
+		<result property="name" column="coursename" />
+		<association property="student" javaType="Student"
+			resultMap="studentResultMap" />
+		<association property="teacher" javaType="Teacher"
+			resultMap="teacherResultMap" />
+	</resultMap>
+	<resultMap id="studentResultMap" type="Student">
+		<id property="id" column="id" />
+		<result property="name" column="student_name" />
+	</resultMap>
+	<resultMap id="teacherResultMap" type="Teacher">
+		<id property="id" column="id" />
+		<result property="name" column="teacher_name" />
+	</resultMap>
+</mapper>

@@ -4,6 +4,8 @@
 	<typeAliases>
 		<typeAlias type="david.model.Student" alias="Student" />
 		<typeAlias type="david.model.Course" alias="Course" />
+		<typeAlias type="david.model.Teacher" alias="Teacher" />
+		<typeAlias type="david.model.CourseDetail" alias="CourseDetail" />		
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -25,5 +27,6 @@
 	<mappers>
 		<mapper resource="ibatis_model/StudentMapper.xml" />
 		<mapper resource="ibatis_model/CourseMapper.xml" />
+		<mapper resource="ibatis_model/CourseDetailMapper.xml" />
 	</mappers>
 </configuration>

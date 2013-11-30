@@ -13,7 +13,29 @@
 	</select>
 	<resultMap id="courseResultMap" type="Course">
 		<id property="id" column="Id" />
-		<result property="studentId" column="studentId" />
+		<result property="studentId" column="StudentId" />
 		<result property="courseName" column="CourseName" />
 	</resultMap>
+	<insert id="addCourse" parameterType="Course" useGeneratedKeys="true"
+		keyProperty="Id">
+		insert into Course (StudentId, CourseName) values
+		(#{studentId}, #{courseName})
+	</insert>
+	<!-- 千万注意此处所有的property属性都是区分大小写的否则默认的getter,setter函数 反射起来会不识别该方法 -->
+	<resultMap type="Course" id="resultMapCourseLsWithStudent">
+		<id property="id" column="id" />
+		<result property="courseName" column="courseName" />
+		<association property="student" javaType="Student">
+			<id property="id" column="sid" />
+			<result property="name" column="name" />
+			<result property="birth" column="createTime" />
+		</association>
+	</resultMap>
+	<select id="getCourseListWithStudentInfo" parameterType="int"
+		resultMap="resultMapCourseLsWithStudent">
+		select course.id, course.courseName, student.id sid,
+		student.name, student.createTime
+		from course inner join student on
+		course.studentId = student.id where student.id = #{studentId};
+	</select>
 </mapper>
