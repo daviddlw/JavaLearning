@@ -6,21 +6,34 @@
 	<!-- 可以重用sql -->
 	<sql id="getListSql">
 		select
-		course.id, course.coursename, teacher.name teacher_name,student.name
+		course.id, course.coursename, teacher.id teacher_id,
+		teacher.name teacher_name,
+		student.id student_id, student.name
 		student_name
-		from course inner join student on course.StudentId =
+		from course inner join student
+		on course.StudentId =
 		student.Id
-		INNER JOIN teacher on course.id = teacher.CourseId
+		INNER JOIN teacher on course.id =
+		teacher.CourseId
 	</sql>
 	<select id="getTotalCount" resultType="int">
 		select count(1) count from (
 		<include refid="getListSql" />
 		) t
 	</select>
-	<select id="getList" resultMap="resultMapCourseDetails" parameterType="BasicQueryArgs">
+	<select id="getList" resultMap="resultMapCourseDetails"
+		parameterType="BasicQueryArgs">
 		select * from (
 		<include refid="getListSql" />
-		ORDER BY course.Id) result limit #{pageIndex}, #{pageSize}
+		ORDER BY course.Id) result
+		<where>
+			<if test="queryId!=0">
+				and result.student_id = #{queryId}
+			</if>
+		</where>
+		<if test="pageIndex!=-1 and pageSize!=-1">
+			limit #{pageIndex}, #{pageSize}
+		</if>
 	</select>
 	<resultMap id="resultMapCourseDetails" type="CourseDetail">
 		<id property="id" column="id" />
@@ -31,11 +44,28 @@
 			resultMap="teacherResultMap" />
 	</resultMap>
 	<resultMap id="studentResultMap" type="Student">
-		<id property="id" column="id" />
+		<id property="id" column="student_id" />
 		<result property="name" column="student_name" />
 	</resultMap>
 	<resultMap id="teacherResultMap" type="Teacher">
-		<id property="id" column="id" />
+		<id property="id" column="teacher_id" />
 		<result property="name" column="teacher_name" />
+	</resultMap>
+	<select id="getListByIds" resultMap="resultMapCourseDetailsByIds"
+		parameterType="ListQueryArgs">
+		select id, CourseName from course
+		<where>
+			<if test="list.size()>0">
+				id in
+				<foreach collection="list" index="index" item="item" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	<resultMap type="CourseDetail" id="resultMapCourseDetailsByIds">
+		<id property="id" column="id" />
+		<result property="name" column="CourseName" />
 	</resultMap>
 </mapper>

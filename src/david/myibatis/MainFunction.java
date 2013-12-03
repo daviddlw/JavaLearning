@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import david.model.BasicQueryArgs;
 import david.model.CourseDetail;
+import david.model.ListQueryArgs;
 import david.model.Student;
 import david.model.Course;
 
@@ -43,6 +44,36 @@ public class MainFunction {
 	 * 联表查询加分页效果（mysql,其他数据库修改相应的SQL语句）
 	 */
 	// queryComplexObj();
+
+	/*
+	 * 动态sql
+	 */
+	// queryByDynamicSql();
+	queryByDynamicSql2();
+    }
+
+    public static void queryByDynamicSql2() {
+	SqlSession session = getSqlSessionByStream();
+	ICourseDetailOperation idOp = session
+		.getMapper(ICourseDetailOperation.class);
+	// List<Integer> queryIds = Arrays.asList(1,2,3);
+	List<Integer> queryIds = new ArrayList<Integer>();
+	List<CourseDetail> ls = idOp.getListByIds(queryIds);
+	for (CourseDetail item : ls) {
+	    System.out.println(String.format("{id：%d, name：%s}", item.getId(),
+		    item.getName()));
+	}
+    }
+
+    public static void queryByDynamicSql() {
+	SqlSession session = getSqlSessionByStream();
+	ICourseDetailOperation idOp = session
+		.getMapper(ICourseDetailOperation.class);
+	BasicQueryArgs args = new BasicQueryArgs(-1, -1, 3);
+	List<CourseDetail> ls = idOp.getList(args);
+	for (CourseDetail item : ls) {
+	    System.out.println(item);
+	}
     }
 
     /*
