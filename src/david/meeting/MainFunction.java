@@ -9,6 +9,6 @@ public class MainFunction {
 		// DemoRun.reflectDemo();
 		// CalendarFormat.testCalendarFormat();
 		// System.out.println(DemoRun.sumFactorial(3));
-		System.out.println(DemoRun.factorial2(6));
+		// System.out.println(DemoRun.factorial2(6));
 	}
 }
