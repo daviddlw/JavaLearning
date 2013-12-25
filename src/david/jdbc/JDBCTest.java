@@ -18,7 +18,8 @@ public class JDBCTest {
 	private static Statement st;
 	private static PreparedStatement pst = null;
 	private static final String CONNECTION_DRIVER_STR = "com.mysql.jdbc.Driver";
-	private static final String CONNECTION_STR = "jdbc:mysql://localhost:3306/test"; // url规则=>
+	private static final String CONNECTION_STR = "jdbc:mysql://127.0.0.1:3306/mybatis_db?useUnicode=true&amp;characterEncoding=utf8";
+
 	// 协议+IP地址（域名）+端口+数据库名
 
 	/*
@@ -26,9 +27,7 @@ public class JDBCTest {
 	 */
 	public static void insert(Student item) {
 		conn = getConnection();
-		String sql = String
-				.format("insert into student (name, createtime) values ('%s', sysdate())",
-						item.getName());
+		String sql = String.format("insert into student (name, createtime) values ('%s', sysdate())", item.getName());
 		try {
 			st = (Statement) conn.createStatement();
 			int count = st.executeUpdate(sql);
@@ -146,8 +145,7 @@ public class JDBCTest {
 		Connection conn = null;
 		try {
 			Class.forName(CONNECTION_DRIVER_STR);
-			conn = DriverManager.getConnection(CONNECTION_STR, "root",
-					"david0110");
+			conn = DriverManager.getConnection(CONNECTION_STR, "root", "david0110");
 		} catch (Exception ex) {
 			// TODO: handle exception
 			StrBuilder sb = new StrBuilder("数据库连接失败了");
